@@ -1,3 +1,4 @@
+#warning this code is made by beginners and any small changes will result in poor execution/ multiple errors
 import random
 
 def display(): #prints row and column numbers
@@ -164,7 +165,7 @@ def board(ship,prob):
     elif attempts >=10 and attempts <= 12:
         print ("Not bad.")
     elif attempts < 10:
-        print ("You have the talent!") #should there be some extra feature for this
+        print ("You have the talent!")
     else:
         print ("You've no luck today, try again.")
 

@@ -73,7 +73,7 @@ def board(ship,prob): #argument 1: number of ships in chosen game mode, argument
                 print("".join(row), countRow)
                 countRow += 1
             print ("You've sunk my battleship!")
-            attempts = booms
+            attempts = booms - 1
             booms = 16
         else:
             display()

@@ -1,4 +1,3 @@
-#warning this code was made by beginners and any small changes will result in poor execution/ multiple errors
 import random
 
 def display(): #prints column numbers
@@ -25,12 +24,12 @@ def display(): #prints column numbers
         num += 1
         i += 1
 
-def board(ship,prob): #argument 1: number of ships in chosen game mode, argument 2: probability of ship appearing in each row
+def board(ship,prob): #define battleship board 
 
     board = []
     row = 1
-    probability = prob
-    ships = ship
+    probability = prob #probability differs for different game modes
+    ships = ship #record number of ships already on the board
 
     while row <= 20:
         rowBoard = []
@@ -38,11 +37,11 @@ def board(ship,prob): #argument 1: number of ships in chosen game mode, argument
         while column <= 60:
             surprise = random.choice(probability)
             if ship == 0:
-                rowBoard.append(0)  #continue appending "empty spots" after all ships have been spawned
+                rowBoard.append(0) #continue appending 'empty spots' after ship count met
                 column += 1
             else:
                 if surprise >= 1 and surprise <= 4 and surprise in rowBoard:
-                    column = column #skip 
+                    column = column
                 else:
                     if surprise == 0:
                         rowBoard.append(surprise)
@@ -57,7 +56,7 @@ def board(ship,prob): #argument 1: number of ships in chosen game mode, argument
         board.append(rowBoard)
         row += 1
 
-####################display########################
+####################display time########################
     displayBoard = []
 
     for i in range(20):
@@ -73,7 +72,7 @@ def board(ship,prob): #argument 1: number of ships in chosen game mode, argument
                 print("".join(row), countRow)
                 countRow += 1
             print ("You've sunk my battleship!")
-            attempts = booms - 1
+            attempts = booms
             booms = 16
         else:
             display()
@@ -92,12 +91,12 @@ def board(ship,prob): #argument 1: number of ships in chosen game mode, argument
             else:
                 booms += 1
                 bombed = board[userRow-1][userCol-1]
-                if ships == 80: #beginner mode
+                if ships == 80:
                     if bombed == 5:
                         print ("You've already bombed that ship.")
                     else:
                         if bombed == 6:
-                            print ("You already know there isn't a ship there.")
+                            print ("You've already know there isn't a ship there.")
                         else:
                             if bombed >= 1 and bombed <= 4:
                                 shipCounter += 1
@@ -115,12 +114,12 @@ def board(ship,prob): #argument 1: number of ships in chosen game mode, argument
                                 board[userRow-1][userCol-1] = 6
                                 displayBoard[userRow-1][userCol-1] = " "
                                 
-                elif ships == 50: #intermediate mode
+                elif ships == 50:
                     if bombed == 4:
                         print ("You've already bombed that ship.")
                     else:
                         if bombed == 5:
-                            print ("You already know there isn't a ship there.")
+                            print ("You've already know there isn't a ship there.")
                         else:
                             if bombed >= 1 and bombed <= 3:
                                 shipCounter += 1
@@ -137,7 +136,7 @@ def board(ship,prob): #argument 1: number of ships in chosen game mode, argument
                                 board[userRow-1][userCol-1] = 6
                                 displayBoard[userRow-1][userCol-1] = " "
                                 
-                elif ships == 20: #advanced mode
+                elif ships == 20:
                     if board[userRow-1][userCol-1] == 2: 
                         print ("You've already bombed that ship.")
                     else:
@@ -165,18 +164,18 @@ def board(ship,prob): #argument 1: number of ships in chosen game mode, argument
     elif attempts >=10 and attempts <= 12:
         print ("Not bad.")
     elif attempts < 10:
-        print ("You have the talent!")
+        print ("You have the talent!") #should there be some extra feature for this
     else:
         print ("You've no luck today, try again.")
 
     userscore = (attempts)
-    print("Your score is", userscore)
+    print("Your score is",userscore)
 
-    scorefile = open('score.txt','r')
-    score = scorefile.readlines()
+    scorefile=open('score.txt','r')
+    score=scorefile.readlines()
     scorefile.close
 
-    scorelist = []
+    scorelist=[]
 
     #put highscores into list
     for line in score:
@@ -252,7 +251,7 @@ try:
         try:
             difficulty = int(input("What difficulty would you like to play? (1=Beginner/2=Intermediate/3=Advance) "))
             if difficulty == 1:
-                board(80, [0,1,0,2,0,3,0,4,0])
+                board(80, [0,1,0,2,0,3,0,4,0]) 
             elif difficulty == 2:
                 board(50,[0,0,0,0,1,0,0,0,0,2,0,0,0,0,0,3,0,0,0])
             elif difficulty == 3:

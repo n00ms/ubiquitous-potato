@@ -1,4 +1,9 @@
+#warning this code was made by beginners and any small changes will result in poor execution/ multiple errors
 import random
+print('''Over the cerulean sea, you and your mate are setting asail, trying to escape from the grasp of the British Navy ship, under her Royal Majesty order, Queen Petunia.
+Ain't nothing more sinner-est than ste
+aling from Petunia's booty locked under the so-called secured bank in London. Titled in bold on the front cover of News Straight Times,
+your crew the Bootleg has once strike again being featured in the monthly newspaper spread more famous than Queen Petunia's fancy wardrobe show.''')
 
 def display(): #prints column numbers
     i = 1
@@ -24,12 +29,12 @@ def display(): #prints column numbers
         num += 1
         i += 1
 
-def board(ship,prob): #define battleship board 
+def board(ship,prob): #argument 1: number of ships in chosen game mode, argument 2: probability of ship appearing in each row
 
     board = []
     row = 1
-    probability = prob #probability differs for different game modes
-    ships = ship #record number of ships already on the board
+    probability = prob
+    ships = ship
 
     while row <= 20:
         rowBoard = []
@@ -37,11 +42,11 @@ def board(ship,prob): #define battleship board
         while column <= 60:
             surprise = random.choice(probability)
             if ship == 0:
-                rowBoard.append(0) #continue appending 'empty spots' after ship count met
+                rowBoard.append(0)  #continue appending "empty spots" after all ships have been spawned
                 column += 1
             else:
                 if surprise >= 1 and surprise <= 4 and surprise in rowBoard:
-                    column = column
+                    column = column #skip 
                 else:
                     if surprise == 0:
                         rowBoard.append(surprise)
@@ -56,7 +61,7 @@ def board(ship,prob): #define battleship board
         board.append(rowBoard)
         row += 1
 
-####################display time########################
+####################display########################
     displayBoard = []
 
     for i in range(20):
@@ -72,7 +77,7 @@ def board(ship,prob): #define battleship board
                 print("".join(row), countRow)
                 countRow += 1
             print ("You've sunk my battleship!")
-            attempts = booms
+            attempts = booms - 1
             booms = 16
         else:
             display()
@@ -91,12 +96,12 @@ def board(ship,prob): #define battleship board
             else:
                 booms += 1
                 bombed = board[userRow-1][userCol-1]
-                if ships == 80:
+                if ships == 80: #beginner mode
                     if bombed == 5:
                         print ("You've already bombed that ship.")
                     else:
                         if bombed == 6:
-                            print ("You've already know there isn't a ship there.")
+                            print ("You already know there isn't a ship there.")
                         else:
                             if bombed >= 1 and bombed <= 4:
                                 shipCounter += 1
@@ -114,12 +119,12 @@ def board(ship,prob): #define battleship board
                                 board[userRow-1][userCol-1] = 6
                                 displayBoard[userRow-1][userCol-1] = " "
                                 
-                elif ships == 50:
+                elif ships == 50: #intermediate mode
                     if bombed == 4:
                         print ("You've already bombed that ship.")
                     else:
                         if bombed == 5:
-                            print ("You've already know there isn't a ship there.")
+                            print ("You already know there isn't a ship there.")
                         else:
                             if bombed >= 1 and bombed <= 3:
                                 shipCounter += 1
@@ -136,7 +141,7 @@ def board(ship,prob): #define battleship board
                                 board[userRow-1][userCol-1] = 6
                                 displayBoard[userRow-1][userCol-1] = " "
                                 
-                elif ships == 20:
+                elif ships == 20: #advanced mode
                     if board[userRow-1][userCol-1] == 2: 
                         print ("You've already bombed that ship.")
                     else:
@@ -158,24 +163,24 @@ def board(ship,prob): #define battleship board
                                 print ("You missed!")
                                 board[userRow-1][userCol-1] = 6
                                 displayBoard[userRow-1][userCol-1] = " "
-
+    attempts = 16
     if attempts >= 13 and attempts <= 15:
         print ("You are a novice.")
     elif attempts >=10 and attempts <= 12:
         print ("Not bad.")
     elif attempts < 10:
-        print ("You have the talent!") #should there be some extra feature for this
-    else:
+        print ("You have the talent!")
+    elif attempts == 16:
         print ("You've no luck today, try again.")
 
     userscore = (attempts)
-    print("Your score is",userscore)
+    print("Your score is", userscore)
 
-    scorefile=open('score.txt','r')
-    score=scorefile.readlines()
+    scorefile = open('score.txt','r')
+    score = scorefile.readlines()
     scorefile.close
 
-    scorelist=[]
+    scorelist = []
 
     #put highscores into list
     for line in score:
@@ -196,7 +201,6 @@ def board(ship,prob): #define battleship board
             print("Try harder next time. :(")
                    
     else:
-        print("Congratulation! You beat the highscore! :)")
         username=(input("Please enter your name: ")+"\n")
         scorelist.append([userscore,username])
         list.sort(scorelist)
@@ -251,7 +255,7 @@ try:
         try:
             difficulty = int(input("What difficulty would you like to play? (1=Beginner/2=Intermediate/3=Advance) "))
             if difficulty == 1:
-                board(80, [0,1,0,2,0,3,0,4,0]) 
+                board(80, [0,1,0,2,0,3,0,4,0])
             elif difficulty == 2:
                 board(50,[0,0,0,0,1,0,0,0,0,2,0,0,0,0,0,3,0,0,0])
             elif difficulty == 3:
@@ -278,6 +282,9 @@ def displayscore():
     readscore = open('score.txt','r')
     score = readscore.readlines()
     readscore.close
+    f = open('score.txt','w')
+    f.write('Highscore.\n')
+    f.close
 
     print("HIGH SCORE")
     for line in score:

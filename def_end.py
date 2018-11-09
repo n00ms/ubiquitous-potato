@@ -28,6 +28,7 @@ def display():
     num = 1
     i = 1
     while i <= 60:
+        
         if i == 60:
             num = 0
             print (num,sep="")
@@ -91,7 +92,7 @@ def board(ship,prob):
             for row in displayBoard:
                 print("".join(row), countRow)
                 countRow += 1
-            print ("You've sunk my battleship!")
+            print ("You've sunk the ship! Aye! Aye! Well done matey!")
             attempts = booms - 1
             booms = 16 
         else:
@@ -103,7 +104,7 @@ def board(ship,prob):
             try:
                 userRow, userCol = map(int, input("Enter location to boom (row,col): ").split())              
                 if userRow < 1 or userRow > 20 or userCol < 1 or userCol > 60:
-                    print ("Sorry, this ocean isn't that big.")
+                    print ("Sorry, this ocean ain't that big.")
                     continue
             except ValueError:
                 print("Sorry, I don't understand that.")
@@ -116,11 +117,11 @@ def board(ship,prob):
                         print ("You've already bombed that ship.")
                     else:
                         if bombed == 6:
-                            print ("You've already know there isn't a ship there.")
+                            print ("Shiver me timbers. Yer must be getting old.You already know there is no ship!")
                         else:
                             if bombed >= 1 and bombed <= 4: 
                                 shipCounter += 1
-                                print ("You've sunk my battleship!")
+                                print ("You've sunk the ship! Aye! Aye! Well done matey!")
                                 shipIndex = []
                                 for n, i in enumerate(board[userRow-1]):
                                     #record unmasked ship in board, unmask in display
@@ -140,11 +141,11 @@ def board(ship,prob):
                         print ("You've already bombed that ship.")
                     else:
                         if bombed == 5:
-                            print ("You've already know there isn't a ship there.")
+                            print ("Shiver me timbers. Yer must be getting old.You already know there is no ship!")
                         else:
                             if bombed >= 1 and bombed <= 3:
                                 shipCounter += 1
-                                print ("You've sunk my battleship!")
+                                print ("You've sunk the ship! Aye! Aye! Well done matey!")
                                 shipIndex = []
                                 for n, i in enumerate(board[userRow-1]):
                                     if i == bombed:
@@ -162,11 +163,11 @@ def board(ship,prob):
                         print ("You've already bombed that ship.")
                     else:
                         if board[userRow-1][userCol-1] == 3:
-                            print ("You already know there isn't a ship there.")
+                            print ("Shiver me timbers. Yer must be getting old.You already know there is no ship!")
                         else:
                             if board[userRow-1][userCol-1] == 1: 
                                 shipCounter += 1
-                                print ("You've sunk my battleship!")
+                                print ("You've sunk the ship! Aye! Aye! Well done matey!")
                                 shipIndex = [] 
                                 for n, i in enumerate(board[userRow-1]): 
                                         if i == 1:
@@ -244,7 +245,7 @@ def mainmenu():
         ans = input()
         if ans == "a":
             try:
-                difficulty = int(input("What difficulty would you like to play? \n1 = Beginner (80 ships)\n2 = Intermediate (50 ships)\n3 = Advanced (20 ships)\n"))
+                difficulty = int(input("Which difficulty would you like to play? \n1 = Beginner (80 ships)\n2 = Intermediate (50 ships)\n3 = Advanced (20 ships)\n"))
                 if difficulty == 1:
                     board(80, [0,1,0,2,0,3,0,4,0])
                     exit()
@@ -307,7 +308,10 @@ print('''
 ''')
 welcome = '''
                  Welcome To Battleship Mates!
-                The goal is to destroy 5 ships!\n
+                The goal is to destroy 5 ships!
+                
+                  Try not to miss the ships
+        or you and your mates will become inmates AHAHA
         '''
 print(welcome)
 
